@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@keyframes borderLight {
+  0% { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+  25% { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+  50% { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); }
+  75% { clip-path: polygon(100% 100%, 100% 100%, 0 100%, 0 100%); }
+  100% { clip-path: polygon(0 100%, 0 100%, 0 0, 0 0); }
+}
+
+.glow-box {
+  position: relative;
+  background: #0a0a0a;
+  border-radius: 12px;
+  padding: 1px;
+}
+
+.glow-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 2px;
+  background: linear-gradient(90deg, #34c3eb, #34c3eb);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderLight 3s linear infinite;
+}
+
+.glow-box-content {
+  position: relative;
+  background: #0a0a0a;
+  border-radius: 11px;
+  height: 100%;
+  z-index: 1;
+}
+
+.cyber-text {
+  text-shadow: 0 0 10px #34c3eb, 0 0 20px #34c3eb;
+}
+
+.skill-tag {
+  background: rgba(52, 195, 235, 0.1);
+  border: 1px solid rgba(52, 195, 235, 0.3);
+  transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+  background: rgba(52, 195, 235, 0.2);
+  border-color: #34c3eb;
+  box-shadow: 0 0 15px rgba(52, 195, 235, 0.5);
+}
