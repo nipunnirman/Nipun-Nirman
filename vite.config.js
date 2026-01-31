@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: "/portfolio-website/", // This matches your repository name
+  base: "/Nipun-Nirman/", // This matches your repository name
 })
