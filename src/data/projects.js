@@ -48,7 +48,8 @@ export const projectsData = [
       'MAE < 20 runs for score prediction',
       'Real-time weather API integration'
     ],
-    tech: ['Python', 'XGBoost', 'Streamlit', 'FastAPI', 'Docker', 'AWS']
+    tech: ['Python', 'XGBoost', 'Streamlit', 'FastAPI', 'Docker', 'AWS'],
+    link: 'https://keththarama-stadium-toss-and-powerp.vercel.app'
   },
   {
     title: 'React E-Commerce Website',
