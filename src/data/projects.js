@@ -1,5 +1,26 @@
 export const projectsData = [
   {
+    title: 'A/L BIOLOGY AI QUESTION ANSWER ASSISTANT',
+    description: 'Multi-agent RAG system using a 3-agent LangGraph pipeline to answer A/L Biology questions with chunk-level citations.',
+    highlights: [
+      '3-agent LangGraph pipeline (Retrieval, Summarization, Verification) with hallucination detection.',
+      'Biology textbook PDFs indexed into Pinecone vector database with Markdown formatted responses.',
+      'Full stack deployment on Vercel with Python serverless backend and Vite built React chatbot UI.'
+    ],
+    tech: ['Python', 'FastAPI', 'LangChain', 'LangGraph', 'Pinecone', 'React', 'Vercel'],
+    link: 'https://al-bio-question-answer-resource-boo.vercel.app'
+  },
+  {
+    title: 'Multi agent RAG System Using NASA data',
+    description: 'Advanced Retrieval-Augmented Generation system combining vector search (ChromaDB) and keyword search (BM25) for semantic and lexical retrieval of NASA technical documents.',
+    highlights: [
+      'Enhanced accuracy achieved through reciprocal rank fusion.',
+      'Interactive Streamlit frontend chatbot with FastAPI backend.',
+      'Containerized with Docker for scalable deployment on AWS Elastic Beanstalk.'
+    ],
+    tech: ['Python', 'LangChain', 'ChromaDB', 'OpenAI', 'Sentence Transformers', 'FastAPI', 'Docker']
+  },
+  {
     title: 'Dementia Risk Prediction Model',
     description: 'Binary classification model achieving 94.19% ROC-AUC for dementia prediction using 195,196 clinical records from NACC dataset.',
     highlights: [
@@ -18,16 +39,6 @@ export const projectsData = [
       'Real-time probability predictions'
     ],
     tech: ['Python', 'XGBoost', 'Streamlit', 'Scikit-Learn', 'SHAP']
-  },
-  {
-    title: 'NASA Hybrid RAG System',
-    description: 'Advanced Retrieval-Augmented Generation system combining vector search and keyword search for NASA technical documents.',
-    highlights: [
-      'ChromaDB + BM25 hybrid search',
-      'AI agent with 6+ NASA API integrations',
-      'Docker containerized on AWS Elastic Beanstalk'
-    ],
-    tech: ['Python', 'LangChain', 'ChromaDB', 'OpenAI', 'FastAPI', 'Docker']
   },
   {
     title: 'Cricket Toss Analysis & Prediction',
