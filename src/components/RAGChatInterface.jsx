@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { X, Send } from 'lucide-react';
+import { projectsData } from '../data/projects';
+import { skillsData } from '../data/skills';
+import { certificationsData } from '../data/certifications';
 
 export const RAGChatInterface = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState([
@@ -11,25 +14,57 @@ export const RAGChatInterface = ({ isOpen, onClose }) => {
     if (!input.trim()) return;
     
     const userMessage = input;
-    setMessages([...messages, { role: 'user', content: userMessage }]);
+    const newMessages = [...messages, { role: 'user', content: userMessage }];
+    setMessages(newMessages);
     setInput('');
-    
-    // TODO: Replace with your RAG API endpoint
-    // Example:
-    // const response = await fetch('YOUR_RAG_API_ENDPOINT', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ message: userMessage })
-    // });
-    // const data = await response.json();
-    
-    // Placeholder response
-    setTimeout(() => {
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: 'This is a placeholder response. Connect your RAG system API here to get intelligent responses about Nipun\'s projects and experience.' 
-      }]);
-    }, 1000);
+
+    try {
+      const systemPrompt = `You are Nipun Nirman's AI portfolio assistant. Your job is to answer questions about his skills, projects, and certifications based ONLY on the following context. If you don't know the answer, say "I don't have information about that, but you can contact Nipun directly at nipunnirman1@gmail.com".
+
+Projects:
+${projectsData.map(p => `- ${p.title}: ${p.description}\n  Highlights: ${p.highlights.join(', ')}\n  Technologies: ${p.tech.join(', ')}${p.link ? `\n  Link: ${p.link}` : ''}`).join('\n\n')}
+
+Skills:
+Programming: ${skillsData.programming.join(', ')}
+Machine Learning: ${skillsData.ml.join(', ')}
+Frameworks: ${skillsData.frameworks.join(', ')}
+Tools: ${skillsData.tools.join(', ')}
+Databases: ${skillsData.databases.join(', ')}
+
+Certifications:
+${certificationsData.map(c => `- ${c}`).join('\n')}
+
+Be friendly, concise, and professional.`;
+
+      const apiMessages = [
+        { role: 'system', content: systemPrompt },
+        ...newMessages.map(msg => ({ role: msg.role, content: msg.content }))
+      ];
+
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
+        },
+        body: JSON.stringify({
+          model: 'gpt-3.5-turbo',
+          messages: apiMessages,
+          temperature: 0.7
+        })
+      });
+
+      const data = await response.json();
+      
+      if (data.choices && data.choices.length > 0) {
+        setMessages(prev => [...prev, { role: 'assistant', content: data.choices[0].message.content }]);
+      } else {
+        throw new Error('No response from API');
+      }
+    } catch (error) {
+      console.error("Error fetching from OpenAI:", error);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error connecting to the AI. Please try again later.' }]);
+    }
   };
 
   if (!isOpen) return null;
