@@ -6,7 +6,7 @@ export const Navigation = ({ activeSection, setActiveSection }) => (
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold cyber-text">NR</h1>
         <div className="flex gap-6">
-          {['Home', 'About', 'Projects', 'Skills', 'Certifications', 'Contact'].map((item) => (
+          {['Home', 'About', 'Experience', 'Projects', 'Skills', 'Certifications', 'Contact'].map((item) => (
             <button
               key={item}
               onClick={() => {

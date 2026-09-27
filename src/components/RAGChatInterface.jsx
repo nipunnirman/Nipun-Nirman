@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { X, Send } from 'lucide-react';
 import { projectsData } from '../data/projects';
+import { experiencesData } from '../data/experience';
 import { skillsData } from '../data/skills';
 import { certificationsData } from '../data/certifications';
 
 export const RAGChatInterface = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hi! I\'m Nipun\'s AI assistant. Ask me anything about his projects, skills, or experience!' }
+    { role: 'assistant', content: 'Hi! I\'m Nipun\'s AI assistant. Ask me anything about his experience, projects, skills, or certifications!' }
   ]);
   const [input, setInput] = useState('');
 
@@ -19,7 +20,10 @@ export const RAGChatInterface = ({ isOpen, onClose }) => {
     setInput('');
 
     try {
-      const systemPrompt = `You are Nipun Nirman's AI portfolio assistant. Your job is to answer questions about his skills, projects, and certifications based ONLY on the following context. If you don't know the answer, say "I don't have information about that, but you can contact Nipun directly at nipunnirman1@gmail.com".
+      const systemPrompt = `You are Nipun Nirman's AI portfolio assistant. Your job is to answer questions about his experience, skills, projects, and certifications based ONLY on the following context. If you don't know the answer, say "I don't have information about that, but you can contact Nipun directly at nipunnirman1@gmail.com".
+
+Experience:
+${experiencesData.map(e => `- ${e.role} at ${e.company} (${e.period}, ${e.location}): ${e.description}\n  Key Responsibilities: ${e.highlights.join('; ')}\n  Technologies/Skills: ${e.tech.join(', ')}`).join('\n\n')}
 
 Projects:
 ${projectsData.map(p => `- ${p.title}: ${p.description}\n  Highlights: ${p.highlights.join(', ')}\n  Technologies: ${p.tech.join(', ')}${p.link ? `\n  Link: ${p.link}` : ''}`).join('\n\n')}

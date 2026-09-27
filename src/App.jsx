@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Navigation } from './components/Navigation';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
+import { ExperienceSection } from './components/ExperienceSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { SkillsSection } from './components/SkillsSection';
 import { CertificationsSection } from './components/CertificationsSection';
@@ -9,6 +10,7 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ChatButton } from './components/ChatButton';
 import { RAGChatInterface } from './components/RAGChatInterface';
+import { experiencesData } from './data/experience';
 import { projectsData } from './data/projects';
 import { skillsData } from './data/skills';
 import { certificationsData } from './data/certifications';
@@ -23,6 +25,7 @@ function App() {
       <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
       <div id="home"><HeroSection /></div>
       <div id="about"><AboutSection /></div>
+      <div id="experience"><ExperienceSection experiences={experiencesData} /></div>
       <div id="projects"><ProjectsSection projects={projectsData} /></div>
       <div id="skills"><SkillsSection skills={skillsData} /></div>
       <div id="certifications"><CertificationsSection certifications={certificationsData} /></div>
